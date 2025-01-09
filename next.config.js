@@ -1,12 +1,11 @@
-import { NextConfig } from 'next';
-
-const nextConfig: any = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
     experimental: {
         appDir: true,
         swcPlugins: [
             ["next-superjson-plugin", {}]
         ]
     },
-};
+}
 
-export default nextConfig;
+module.exports = nextConfig
