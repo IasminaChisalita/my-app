@@ -5,6 +5,7 @@ import { useState } from "react";
 import DesktopItem from "./DesktopItem";
 
 import { User } from "@prisma/client";
+import Avatar from "../Avatar";
 
 interface DesktopSidebarProps {
     currentUser: User
