@@ -6,6 +6,7 @@ import DesktopItem from "./DesktopItem";
 import { User } from "@prisma/client";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import Avatar from "../Avatar";
+import SettingsModal from "./SettingsModal";
 
 interface DesktopItemProps {
     currentUser: User
@@ -20,6 +21,11 @@ const DesktopSidebar: React.FC<DesktopItemProps> = ({
     console.log({currentUser})
     return (
         <>
+        <SettingsModal
+        currentUser={currentUser}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        />
         <div className="
         hidden
         lg:fixed

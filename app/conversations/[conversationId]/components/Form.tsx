@@ -9,7 +9,7 @@ import{
 } from "react-hook-form";
 import { HiPaperAirplane, HiPhoto } from "react-icons/hi2";
 import MessageInput from "./MessageInput";
-import { CldUploadButton } from "next-cloudinary";
+import {CldUploadButton} from "next-cloudinary";
 
 const Form = () => {
     const {conversationId} = useConversation();
@@ -59,11 +59,11 @@ const Form = () => {
             "
         >
             <CldUploadButton
-                options={{ maxFiles: 1}}
-                onSuccess={handleUpload}
-                uploadPreset="yh25xwb7"
+            options= {{maxFiles: 1}}
+            onSuccess={handleUpload}
+            uploadPreset="yh25xwb7"
             >
-                <HiPhoto size={30} className="text-sky-500" />
+            <HiPhoto size={30} className="text-sky-500" />
             </CldUploadButton>
             <form
                 onSubmit={handleSubmit(onSubmit)}

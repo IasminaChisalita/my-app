@@ -1,16 +1,17 @@
 import prisma from "@/app/libs/prismadb";
+import ConversationId from "../conversations/[conversationId]/page";
 
 const getMessages = async (
-    conversationId: string
+    ConversationId: string
 ) => {
     try {
         const messages = await prisma.message.findMany({
             where: {
-                conversationId: conversationId
+                conversationId: ConversationId
             },
             include: {
                 sender: true,
-                seen: true,
+                seen:true,
             },
             orderBy: {
                 createdAt: 'asc'

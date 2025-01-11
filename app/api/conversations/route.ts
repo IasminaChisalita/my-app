@@ -1,7 +1,6 @@
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
-import { use } from "react";
 
 export async function POST(
     request: Request
@@ -10,33 +9,33 @@ export async function POST(
         const currentUser = await getCurrentUser();
         const body = await request.json();
         const {
-            userId,
-            isGroup,
-            members,
-            name
+          userId,
+          isGroup,
+          members,
+          name
         } = body;
 
-        if(!currentUser?.id || !currentUser?.email) {
+        if (!currentUser?.id || !currentUser?.email) {
             return new NextResponse('Unauthorized', {status: 401});
         }
 
         if(isGroup && (!members || members.length < 2 || !name)) {
-            return new NextResponse('Invalid data', { status: 400 });
+            return new NextResponse('Invalid data', {status: 400});
         }
 
-        if(isGroup) {
-            const newConversation = await prisma.conversation.create ({
+        if (isGroup){
+            const newConversation = await prisma.conversation.create({
                 data: {
                     name,
                     isGroup,
-                    users:{
-                        connect:[
-                            ...members.map((member: {value: string }) => ({
-                                id: members.value
-                            })),
-                            {
-                                id: currentUser.id
-                            }
+                    users: {
+                        connect: [
+                            ...members.map((member: { value: string}) => ({
+                            id: member.value
+                        })),
+                        {
+                            id: currentUser.id
+                        }
                         ]
                     }
                 },
@@ -44,37 +43,34 @@ export async function POST(
                     users: true
                 }
             });
-            
+
             return NextResponse.json(newConversation);
         }
-        //asta a fost group chat
 
         const existingConversations = await prisma.conversation.findMany({
-            where: {
-                OR: [
-                    {
-                        userIds: {
-                            equals: [currentUser.id, userId]
-                        }
-                    },
-                    {
-                        userIds: {
-                            equals: [userId, currentUser.id]
-                        }
+           where: {
+            OR: [
+                {
+                    userIds: {
+                        equals: [currentUser.id, userId]
                     }
-                ]
-            }
+                },
+                {
+                    userIds: {
+                        equals: [userId, currentUser.id]
+                    }
+                }
+            ]
+           }
         });
 
         const singleConversation = existingConversations[0];
 
-        //acum pt o singura conv
-        if(singleConversation) {
+        if (singleConversation) {
             return NextResponse.json(singleConversation);
         }
 
         const newConversation = await prisma.conversation.create({
-
             data: {
                 users: {
                     connect: [
@@ -82,18 +78,20 @@ export async function POST(
                             id: currentUser.id
                         },
                         {
-                            id: userId
+                            id:userId
                         }
                     ]
                 }
-            },
-            include: {
-                users: true
+                },
+                include: {
+                    users: true
             }
         });
 
         return NextResponse.json(newConversation);
+
     } catch (error: any) {
-        return new NextResponse('Internal Error', {status: 500});
+        return new NextResponse('Interna; Error', {status: 500});
     }
 }
+

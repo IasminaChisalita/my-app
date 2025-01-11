@@ -82,60 +82,59 @@ errors,
             </p>
 
             <div className="
-                mt-10
+            mt-10
+            flex
+            flex-col
+            gap-y-8
+            "> 
+            <Input
+            disabled={isLoading}
+            label="Name"
+            id="name"
+            errors={errors}
+            required
+            register={register}
+            />
+            <div>
+                <label
+                className="
+                block
+                text-sm
+                font-medium
+                leading-6
+                text-gray-900
+                "
+                >
+                  Photo  
+                </label>
+                <div className="
+                mt-2
                 flex
-                flex-col
-                gap-y-8
-            ">
-                <Input
-                    disabled={isLoading}
-                    label="Name"
-                    id="name"
-                    errors={errors}
-                    required
-                    register={register}
+                items-center
+                gap-x-3
+                ">
+                <Image 
+                width="48"
+                height="48"
+                className="rounded-full"
+                src={image || currentUser?.image || '/images/placeholder.jpg'}
+                alt="Avatar"
                 />
-                <div>
-                    <label
-                        className="
-                            block
-                            text-sm
-                            font-medium
-                            leading-6
-                            text-gray-900
-                        "
-                    >
-                        Photo
-                    </label>
-                    <div className="
-                        mt-2
-                        flex
-                        items-center
-                        gap-x-3
-                    ">
-                        <Image
-                            width="48"
-                            height="48"
-                            className="rounded-full"
-                            src={image || currentUser?.image || '/images/placeholder.jpg'}
-                            alt="Avatar"    
-                        />
-
-                        <CldUploadButton
-                            options={{maxFiles: 1}}
-                            onSuccess={handleUpload}
-                            uploadPreset="yh25xwb7"
-                        >
-                            <Button
-                                disabled={isLoading}
-                                secondary
-                                type="button"
-                            >
-                                Change
-                            </Button>
-                        </CldUploadButton>
-                    </div>
+                <CldUploadButton
+                  options={{maxFiles: 1}}
+                  onSuccess={handleUpload}
+                  uploadPreset="yh25xwb7"
+                >
+                 <Button
+                   disabled={isLoading}
+                   secondary
+                   type="button"
+                 >
+                    Change
+                 </Button>
+                </CldUploadButton>
                 </div>
+            </div>
             </div>
           </div>
          </div>

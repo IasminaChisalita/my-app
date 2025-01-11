@@ -6,7 +6,7 @@ const getUsers = async () => {
     const session = await getSession();
 
     if(!session?.user?.email) {
-        return [];
+        return []
     }
 
     try{
@@ -15,16 +15,16 @@ const getUsers = async () => {
                 createdAt: 'desc',
             },
             where: {
-                NOT: {
-                    email: session.user.email
+              NOT: {
+                email: session.user.email
                 }
             }
         });
 
-        return users;
+        return users; 
     } catch (error: any) {
         return [];
     }
-};
+}
 
 export default getUsers;

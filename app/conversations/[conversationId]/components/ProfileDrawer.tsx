@@ -155,29 +155,28 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                 </div>
                             </div>
                             <div
-                                className="
-                                    relative mt-6
-                                    flex-1 px-4
-                                    sm:px-6
-                                    "
-                            >
-                                <div className="
-                                    flex flex-col items-center
-                                ">
-                                    <div className="mb-2">
-                                        <Avatar user={otherUser} />
-                                    </div>
-                                    <div>
-                                    {title}
-                                    </div>
-                                    <div className="
-                                        text-sm 
-                                        text-gray-500
-                                    ">
-                                    {statusText}
-                                    </div>
-                                    <div className="flex gap-10 my-8">
-                                    <div
+              className="
+              relative mt-6
+              flex-1 px-4
+              sm:px-6
+              "
+              >
+                <div className="
+                 flex flex-col items-center
+                ">
+                    <div className="mb-2">
+                        <Avatar user={otherUser} />
+                    </div>
+                    <div>
+                        {title}
+                    </div>
+                    <div className="
+                    text-sm text-gray-500
+                    ">
+                        {statusText}
+                    </div>
+                    <div className="flex gap-10 my-8">
+                       <div
                        onClick={() => setConfirmOpen(true)}
                        className="
                        flex
